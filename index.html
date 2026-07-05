@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :root {
+    --bg: #ffffff;
+    --bg-2: #f6f6f5;
+    --text: #141414;
+    --muted: #6a6a68;
+    --faint: #9b9b98;
+    --line: #ebeae7;
+    --line-strong: #d9d8d4;
+  }
+  [data-theme="dark"] {
+    --bg: #0e0f11;
+    --bg-2: #17181b;
+    --text: #f1f1ef;
+    --muted: #9a9b9e;
+    --faint: #626368;
+    --line: #212328;
+    --line-strong: #313339;
+  }
+  a { color: inherit; }
+  ::selection { background: var(--text); color: var(--bg); }
+</style>
+</helmet>
+
+<div data-theme="{{ theme }}" style="min-height:100vh; background:var(--bg); color:var(--text); transition:background .4s ease, color .4s ease;">
+  <div style="max-width:680px; margin:0 auto; padding:0 26px;">
+
+    <!-- top bar -->
+    <header style="display:flex; align-items:center; justify-content:space-between; padding:26px 0 0;">
+      <span style="font-size:13px; font-weight:500; letter-spacing:-.01em; color:var(--muted);">김무겸 <span style="color:var(--faint); font-weight:400;">MuGyum Kim</span></span>
+      <button onClick="{{ toggleTheme }}" aria-label="Toggle color theme" title="Toggle theme" style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border:1px solid var(--line-strong); background:transparent; color:var(--muted); border-radius:999px; cursor:pointer; transition:border-color .2s ease, color .2s ease;" style-hover="{{ toggleHover }}">
+        {{ themeGlyph }}
+      </button>
+    </header>
+
+    <!-- hero -->
+    <section data-reveal="1" style="padding:44px 0 56px; border-bottom:1px solid var(--line);">
+      <img src="assets/portrait.jpeg" alt="김무겸 증명사진" width="112" height="132" style="display:block; width:112px; height:132px; object-fit:cover; object-position:50% 16%; border-radius:20px; margin-bottom:30px; background:var(--bg-2);">
+
+      <h1 style="margin:0; font-size:clamp(42px,8vw,58px); font-weight:680; line-height:1.02; letter-spacing:-.03em;">김무겸</h1>
+      <div style="margin-top:12px; font-size:18px; font-weight:400; color:var(--muted); letter-spacing:-.01em;">MuGyum Kim <span style="color:var(--faint);">· 학부연구생 Undergraduate Researcher</span></div>
+
+      <p style="margin:28px 0 0; max-width:30ch; font-size:clamp(20px,3.2vw,24px); font-weight:400; line-height:1.4; letter-spacing:-.017em; color:var(--text); text-wrap:balance;">
+        Undergraduate AI researcher interested in Computer Vision &amp; Security.
+      </p>
+
+      <div style="margin-top:26px; display:grid; grid-template-columns:auto 1fr; gap:5px 18px; align-items:baseline; font-size:14px; line-height:1.5;">
+        <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">Lab</span>
+        <span style="color:var(--text);">충남대학교 인공지능학과 · 딥챌린지랩 <span style="color:var(--faint);">Deep Challenge Lab</span></span>
+        <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">Univ</span>
+        <span style="color:var(--muted);">Chungnam National University, Dept. of Artificial Intelligence</span>
+        <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">Status</span>
+        <span style="color:var(--muted);">인공지능학과 재학 · 2028년 2월 졸업 예정</span>
+      </div>
+
+      <div style="margin-top:34px; display:flex; flex-wrap:wrap; gap:12px;">
+        <a href="mailto:mugyumk@gmail.com" style="display:inline-flex; align-items:center; height:48px; padding:0 24px; background:var(--text); color:var(--bg); border-radius:11px; font-size:15px; font-weight:550; text-decoration:none; transition:opacity .18s ease;" style-hover="{{ inkHover }}">Email</a>
+        <a href="https://github.com/kmmugyum" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; height:48px; padding:0 22px; background:transparent; color:var(--text); border:1px solid var(--line-strong); border-radius:11px; font-size:15px; font-weight:550; text-decoration:none; transition:border-color .2s ease;" style-hover="{{ ghostHover }}">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div style="margin-top:16px; font-size:13px; color:var(--faint); display:flex; flex-wrap:wrap; gap:6px 18px;">
+        <span>mugyumk@gmail.com</span>
+        <span>github.com/kmmugyum</span>
+      </div>
+    </section>
+
+    <!-- skills -->
+    <section data-reveal="1" style="padding:48px 0; border-bottom:1px solid var(--line);">
+      <div style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin-bottom:26px;">Skills · 기술 스택</div>
+      <div>
+        <sc-for list="{{ skills }}" as="cat" hint-placeholder-count="6">
+          <div style="display:grid; grid-template-columns:minmax(150px,200px) 1fr; gap:12px 24px; padding:16px 0; border-top:1px solid var(--line);">
+            <div style="display:flex; align-items:center; gap:11px; padding-top:2px;">
+              <span style="display:inline-flex; flex:none; color:var(--faint);">{{ cat.icon }}</span>
+              <span style="font-size:14.5px; font-weight:600; letter-spacing:-.01em; color:var(--muted);">{{ cat.label }}</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <sc-for list="{{ cat.items }}" as="item" hint-placeholder-count="3">
+                <span style="display:inline-flex; align-items:center; min-height:32px; padding:0 12px; font-size:13.5px; color:var(--text); background:var(--bg-2); border:1px solid var(--line); border-radius:8px; white-space:nowrap;">{{ item }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- projects -->
+    <section style="padding:48px 0 8px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin-bottom:8px;">Projects · 주요 프로젝트</div>
+      <div>
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
+          <article data-reveal="1" style="display:grid; grid-template-columns:52px 1fr; gap:20px; padding:34px 0; border-top:1px solid var(--line);">
+            <div style="font-size:14px; font-weight:600; color:var(--faint); padding-top:4px; font-variant-numeric:tabular-nums;">{{ p.no }}</div>
+            <div style="min-width:0;">
+              <div style="font-size:12.5px; color:var(--faint); display:flex; flex-wrap:wrap; gap:4px 10px; margin-bottom:12px; font-variant-numeric:tabular-nums;">
+                <span>{{ p.period }}</span>
+                <span style="color:var(--line-strong);">·</span>
+                <span style="color:var(--muted);">{{ p.org }}</span>
+              </div>
+              <h3 style="margin:0 0 13px; font-size:20px; line-height:1.34; letter-spacing:-.018em; font-weight:640;">{{ p.title }}</h3>
+              <p style="margin:0; font-size:14.5px; line-height:1.68; color:var(--muted); max-width:56ch;">{{ p.desc }}</p>
+
+              <div style="margin-top:22px; display:flex; flex-wrap:wrap; gap:28px 40px;">
+                <sc-for list="{{ p.metrics }}" as="m" hint-placeholder-count="2">
+                  <div style="display:flex; flex-direction:column; gap:5px;">
+                    <span style="font-size:clamp(32px,5vw,40px); line-height:.9; font-weight:700; letter-spacing:-.03em; color:var(--text); font-variant-numeric:tabular-nums;">{{ m.value }}</span>
+                    <span style="font-size:12px; letter-spacing:.01em; color:var(--faint);">{{ m.label }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ p.note }}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--line); font-size:13px; line-height:1.6; color:var(--muted);">{{ p.note }}</div>
+              </sc-if>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer style="padding:38px 0 56px; border-top:1px solid var(--line); margin-top:26px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;">
+      <div style="font-size:13px; color:var(--faint);">김무겸 · MuGyum Kim © 2026</div>
+      <div style="display:flex; gap:20px; font-size:14px;">
+        <a href="mailto:mugyumk@gmail.com" style="text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line-strong);">Email</a>
+        <a href="https://github.com/kmmugyum" target="_blank" rel="noopener" style="text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line-strong);">GitHub</a>
+      </div>
+    </footer>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:680,&quot;height&quot;:1300},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;system&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'system'|'light'|'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;revealOnScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  state = { theme: 'light' };
+
+  componentDidMount() {
+    let t = null;
+    try { t = localStorage.getItem('portfolio-theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') {
+      const pref = this.props.defaultTheme || 'system';
+      if (pref === 'light' || pref === 'dark') t = pref;
+      else t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+    this.setState({ theme: t });
+    this.setupReveal();
+  }
+
+  setupReveal() {
+    if ((this.props.revealOnScroll ?? true) === false) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    requestAnimationFrame(() => {
+      const els = Array.from(document.querySelectorAll('[data-reveal]'));
+      els.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1)';
+      });
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'none';
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+      els.forEach(el => io.observe(el));
+    });
+  }
+
+  toggleTheme = () => {
+    this.setState(s => {
+      const next = s.theme === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
+      return { theme: next };
+    });
+  };
+
+  renderVals() {
+    const dark = this.state.theme === 'dark';
+    const P = (d) => React.createElement('path', { d });
+    const C = (cx, cy, r) => React.createElement('circle', { cx, cy, r });
+    const R = (x, y, w, h) => React.createElement('rect', { x, y, width: w, height: h, rx: 1.2 });
+    const S = (...ch) => React.createElement('svg', { width: 19, height: 19, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, ch);
+    const icons = {
+      languages: S(P('m9 8-4 4 4 4'), P('m15 8 4 4-4 4')),
+      frameworks: S(P('m12 3 9 5-9 5-9-5 9-5z'), P('m3 13 9 5 9-5'), P('m3 17 9 5 9-5')),
+      databases: S(React.createElement('ellipse', { cx: 12, cy: 6, rx: 8, ry: 3 }), P('M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6'), P('M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3')),
+      libraries: S(R(3, 3, 7, 7), R(14, 3, 7, 7), R(3, 14, 7, 7), R(14, 14, 7, 7)),
+      training: S(P('M4 5v14h16'), P('m7 14 3.5-3.5 3 3L21 7')),
+      devops: S(React.createElement('line', { x1: 6, y1: 3, x2: 6, y2: 15 }), C(18, 6, 3), C(6, 18, 3), P('M18 9a9 9 0 0 1-9 9')),
+    };
+    const sun = React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round' },
+      React.createElement('circle', { cx: 12, cy: 12, r: 4 }),
+      React.createElement('path', { d: 'M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4' })
+    );
+    const moon = React.createElement('svg', { width: 15, height: 15, viewBox: '0 0 24 24', fill: 'currentColor' },
+      React.createElement('path', { d: 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z' })
+    );
+
+    return {
+      theme: this.state.theme,
+      toggleTheme: this.toggleTheme,
+      themeGlyph: dark ? moon : sun,
+      toggleHover: { borderColor: 'var(--muted)', color: 'var(--text)' },
+      inkHover: { opacity: 0.85 },
+      ghostHover: { borderColor: 'var(--muted)' },
+      skills: [
+        { label: 'Languages', icon: icons.languages, items: ['Python', 'C / C++'] },
+        { label: 'Frameworks', icon: icons.frameworks, items: ['PyTorch', 'TensorFlow'] },
+        { label: 'Databases', icon: icons.databases, items: ['ClickHouse', 'Firebase'] },
+        { label: 'Libraries', icon: icons.libraries, items: ['NumPy', 'Pandas', 'scikit-learn', 'OpenCV', 'geoip2fast'] },
+        { label: 'Training & Exp.', icon: icons.training, items: ['Weights & Biases'] },
+        { label: 'DevOps & Tools', icon: icons.devops, items: ['Git / GitHub'] },
+      ],
+      projects: [
+        {
+          no: '01',
+          title: '방화벽 로그 기반 위협 트래픽 탐지 시스템',
+          period: '2026.03 – 2026.06', org: 'ETRI 연계',
+          desc: '방화벽 flow 로그를 SDS(Scan Detection Sketch)로 집계해 시간 비의존적 epoch 단위로 압축하고, 28차원 feature vector로 normal · scanning · C2_beacon · malware_delivery 4개 유형을 판정하는 multi-label 탐지 체계.',
+          metrics: [
+            { value: '94.8%', label: 'Test Macro-F1' },
+            { value: '95.3%', label: 'Validation Macro-F1' },
+          ],
+          note: 'ClickHouse 기반 end-to-end 자동화 파이프라인 구축.',
+        },
+        {
+          no: '02',
+          title: '세그멘테이션 기반 농경지 모니터링 시스템',
+          period: '2023.06 – 2023.12', org: '충남대 × 컨텍 기업연계',
+          desc: '인공위성 영상에서 농경지를 세그멘테이션해 준실시간으로 상태 변화를 추적. UNet · Segformer · HRNet · DeepLab 비교, SIFT 기반 다중 위성영상 정합(registration) 구현.',
+          metrics: [
+            { value: '88.9%', label: 'mIoU · 목표 60% 초과 달성' },
+          ],
+          note: '',
+        },
+        {
+          no: '03',
+          title: 'CCTV 기반 음주운전 가능성 예측 및 경고 시스템',
+          period: '2023.05 – 2024.02', org: 'RIS 과제',
+          desc: 'Detection → Tracking → Pose → Activity → Car Pose → Seat 6단계 파이프라인. EfficientDet · BoT-SORT · MoveNet · 3D ResNet-SE로 이상행동을 분류하고 운전석 탑승을 판별.',
+          metrics: [
+            { value: '6단계', label: '실시간 이상행동 분석 파이프라인' },
+          ],
+          note: 'Docker 3-컨테이너(React / Flask / Model Server)로 PyTorch · TF GPU 충돌 격리.',
+        },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
