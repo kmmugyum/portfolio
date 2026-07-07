@@ -57,20 +57,22 @@
       <img src="assets/portrait.jpeg" alt="김무겸 증명사진" width="112" height="132" style="display:block; width:112px; height:132px; object-fit:cover; object-position:50% 16%; border-radius:20px; margin-bottom:30px; background:var(--bg-2);">
 
       <h1 style="margin:0; font-size:clamp(42px,8vw,58px); font-weight:680; line-height:1.02; letter-spacing:-.03em;">김무겸</h1>
-      <div style="margin-top:12px; font-size:18px; font-weight:400; color:var(--muted); letter-spacing:-.01em;">MuGyum Kim <span style="color:var(--faint);">· 학부연구생 Undergraduate Researcher</span></div>
+        <div style="margin-top:12px; font-size:18px; font-weight:400; color:var(--muted); letter-spacing:-.01em;">MuGyum Kim <span style="color:var(--faint);">· 학부연구생 Undergraduate Researcher</span></div>
 
-      <p style="margin:28px 0 0; max-width:30ch; font-size:clamp(20px,3.2vw,24px); font-weight:400; line-height:1.4; letter-spacing:-.017em; color:var(--text); text-wrap:balance;">
-        Undergraduate AI researcher interested in Computer Vision &amp; Security.
-      </p>
+        <p style="margin:28px 0 0; max-width:30ch; font-size:clamp(20px,3.2vw,24px); font-weight:400; line-height:1.4; letter-spacing:-.017em; color:var(--text); text-wrap:balance;">
+          Undergraduate AI researcher interested in Computer Vision &amp; Security.
+        </p>
 
-      <div style="margin-top:26px; display:grid; grid-template-columns:auto 1fr; gap:5px 18px; align-items:baseline; font-size:14px; line-height:1.5;">
-        <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">Lab</span>
-        <span style="color:var(--text);">충남대학교 인공지능학과 · 딥챌린지랩 <span style="color:var(--faint);">Deep Challenge Lab</span></span>
-        <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">Univ</span>
-        <span style="color:var(--muted);">Chungnam National University, Dept. of Artificial Intelligence</span>
-        <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">Status</span>
-        <span style="color:var(--muted);">인공지능학과 재학 · 2028년 2월 졸업 예정</span>
-      </div>
+        <div style="margin-top:26px; display:grid; grid-template-columns:auto 1fr; gap:5px 18px; align-items:baseline; font-size:14px; line-height:1.5;">
+          <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">Univ / Lab</span>
+          <span style="color:var(--text);">Chungnam National University, 컴퓨터융합학부 딥챌린지 연구실 <span style="color:var(--faint);">Deep Challenge Lab</span></span>
+          
+          <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">Status</span>
+          <span style="color:var(--muted);">인공지능학과 재학 (2028년 2월 졸업 예정)</span>
+
+          <span style="font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); padding-top:1px;">GPA</span>
+          <span style="color:var(--muted);">전체 4.22 / <strong style="color:var(--text); font-weight:600;">전공 4.39</strong> <span style="color:var(--faint); font-size:12px;">(4.5 기준)</span></span>
+        </div>
 
       <div style="margin-top:34px; display:flex; flex-wrap:wrap; gap:12px;">
         <a href="mailto:mugyumk@gmail.com" style="display:inline-flex; align-items:center; height:48px; padding:0 24px; background:var(--text); color:var(--bg); border-radius:11px; font-size:15px; font-weight:550; text-decoration:none; transition:opacity .18s ease;" style-hover="{{ inkHover }}">Email</a>
@@ -239,17 +241,18 @@ class Component extends DCLogic {
         { label: 'DevOps & Tools', icon: icons.devops, items: ['Git / GitHub'] },
       ],
       projects: [
-        {
-          no: '01',
-          title: '방화벽 로그 기반 위협 트래픽 탐지 시스템',
-          period: '2026.03 – 2026.06', org: 'ETRI 연계',
-          desc: '방화벽 flow 로그를 SDS(Scan Detection Sketch)로 집계해 시간 비의존적 epoch 단위로 압축하고, 28차원 feature vector로 normal · scanning · C2_beacon · malware_delivery 4개 유형을 판정하는 multi-label 탐지 체계.',
-          metrics: [
-            { value: '94.8%', label: 'Test Macro-F1' },
-            { value: '95.3%', label: 'Validation Macro-F1' },
-          ],
-          note: 'ClickHouse 기반 end-to-end 자동화 파이프라인 구축.',
-        },
+              {
+                "no": "01",
+                "title": "방화벽 플로우 로그 기반 다중 레이블 침입 탐지 시스템 구축",
+                "period": "2026.03 – 2026.06",
+                "org": "한국전자통신연구원(ETRI) 연계",
+                "desc": "방화벽 플로우 로그를 스캔 탐지 스케치(SDS) 기반 볼륨 트리거 기법으로 에포크(Epoch) 단위로 집계하고, 28차원 행위 피처 벡터를 활용하여 정상 트래픽 및 3대 위협(스캐닝, C2 비커닝, 악성코드 유포)을 다중 레이블 분류하는 다층 퍼셉트론(MLP) 침입 탐지 프레임워크 구축.",
+                "metrics": [
+                  { "value": "94.8%", "label": "테스트 셋 매크로-F1" },
+                  { "value": "95.3%", "label": "검증 셋 매크로-F1" },
+                ],
+                "note": "ClickHouse 기반 end-to-end 파이프라인 구축. LODO(Leave-One-Dataset-Out) 교차 도메인 일반화 성능 평가를 통해 데이터셋 핑거프린팅 효과 확인."
+              },
         {
           no: '02',
           title: '세그멘테이션 기반 농경지 모니터링 시스템',
