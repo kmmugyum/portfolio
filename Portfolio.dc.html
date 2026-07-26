@@ -49,6 +49,14 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .dc-cursor { animation: none; }
+    /* Safety net: JS injects inline transitions (reveal, tilt) that this rule
+       must still be able to neutralise if any path reaches them. */
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
   @media (max-width: 560px) {
     .dc-skill-row { grid-template-columns: 1fr !important; gap: 10px 0 !important; }
@@ -172,25 +180,48 @@
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:680,&quot;height&quot;:1300},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;system&quot;,&quot;options&quot;:[&quot;system&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'system'|'light'|'dark'&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;revealOnScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:860,&quot;height&quot;:1300},&quot;revealOnScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
 class Component extends DCLogic {
   // No reactive state: dc-runtime renders once, then all animation is pure DOM.
   // This avoids setState re-renders resetting animated textContent mid-flight.
 
   componentDidMount() {
+    // Single abort signal for every listener registered below, so unmount can
+    // tear them all down without needing named handler references.
+    this._ac = new AbortController();
     this.reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    // Touch/coarse-pointer devices: no hover cursor, so pointer-driven effects
+    // (spotlight, tilt) are meaningless; typing also causes layout jump when the
+    // tagline wraps to multiple lines on narrow screens.
+    this.touch = !!(window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches);
     const motion = !this.reduced && (this.props.revealOnScroll ?? true) !== false;
 
     // typing targets (default text is already in the DOM as a fallback)
     requestAnimationFrame(() => {
       if (!motion) { this.revealAll(); this.fillMetricsInstant(); return; }
-      this.setupSpotlight();
+      // Pointer-driven effects only on devices with a real cursor.
+      if (!this.touch) {
+        this.setupSpotlight();
+        this.setupTilt();
+      }
       this.setupReveal();
-      this.setupTilt();
+
       const name = document.getElementById('dc-name');
       const nameCur = document.getElementById('dc-name-cur');
       const tag = document.getElementById('dc-tag');
       const tagCur = document.getElementById('dc-tag-cur');
+
+      // On touch screens, skip typing so the wrapping tagline doesn't grow the
+      // hero height mid-animation and shove the page around. Show final text,
+      // hide the (now-static) cursors.
+      if (this.touch) {
+        if (name) name.textContent = name.getAttribute('data-type') || name.textContent;
+        if (tag) tag.textContent = tag.getAttribute('data-type') || tag.textContent;
+        if (nameCur) nameCur.style.display = 'none';
+        if (tagCur) tagCur.style.display = 'none';
+        return;
+      }
+
       if (tagCur) tagCur.style.display = 'none';
       if (nameCur) nameCur.style.display = 'inline-block';
       this.typeInto(name, () => {
@@ -199,6 +230,14 @@ class Component extends DCLogic {
         this.typeInto(tag, () => {}, 26);
       }, 62);
     });
+  }
+
+  componentWillUnmount() {
+    // Tear down everything componentDidMount started: listeners (via the shared
+    // abort signal), the pending typing timer, and the reveal observer.
+    if (this._ac) this._ac.abort();
+    if (this._t) clearTimeout(this._t);
+    if (this._io) this._io.disconnect();
   }
 
   typeInto(node, onDone, speed) {
@@ -221,9 +260,12 @@ class Component extends DCLogic {
 
   setupReveal() {
     const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    // On touch screens use a fade-only reveal — no translateY — so nothing
+    // shifts vertically as sections appear.
+    const shift = this.touch ? 'none' : 'translateY(18px)';
     els.forEach(el => {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(18px)';
+      el.style.transform = shift;
       el.style.transition = 'opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1)';
     });
     const done = (el) => {
@@ -238,6 +280,7 @@ class Component extends DCLogic {
         if (e.isIntersecting) { done(e.target); io.unobserve(e.target); }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    this._io = io;
     els.forEach(el => io.observe(el));
   }
 
@@ -305,7 +348,7 @@ class Component extends DCLogic {
       const el = spot(); if (!el) return;
       el.style.background = 'radial-gradient(600px circle at ' + e.clientX + 'px ' + e.clientY + 'px, color-mix(in srgb, var(--accent) 10%, transparent), transparent 55%)';
     };
-    window.addEventListener('pointermove', this._onMove, { passive: true });
+    window.addEventListener('pointermove', this._onMove, { passive: true, signal: this._ac.signal });
   }
 
   setupTilt() {
@@ -318,12 +361,12 @@ class Component extends DCLogic {
           card.style.transform = 'perspective(900px) rotateX(' + (-py * 4).toFixed(2) + 'deg) rotateY(' + (px * 5).toFixed(2) + 'deg) translateY(-2px)';
           card.style.borderColor = 'var(--accent)';
           card.style.boxShadow = '0 12px 40px -12px color-mix(in srgb, var(--accent) 40%, transparent)';
-        });
+        }, { signal: this._ac.signal });
         card.addEventListener('pointerleave', () => {
           card.style.transform = 'none';
           card.style.borderColor = 'var(--line-strong)';
           card.style.boxShadow = 'none';
-        });
+        }, { signal: this._ac.signal });
       });
     });
   }
