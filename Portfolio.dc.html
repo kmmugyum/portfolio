@@ -422,16 +422,6 @@ class Component extends DCLogic {
           ],
           note: '',
         },
-        {
-          no: '03',
-          title: 'CCTV 기반 음주운전 가능성 예측 및 경고 시스템',
-          period: '2023.05 – 2024.02', org: 'RIS 과제',
-          desc: 'Detection → Tracking → Pose → Activity → Car Pose → Seat 6단계 파이프라인. EfficientDet · BoT-SORT · MoveNet · 3D ResNet-SE로 이상행동을 분류하고 운전석 탑승을 판별.',
-          metrics: [
-            { value: '6단계', label: '실시간 이상행동 분석 파이프라인' },
-          ],
-          note: 'Docker 3-컨테이너(React / Flask / Model Server)로 PyTorch · TF GPU 충돌 격리.',
-        },
       ]),
     };
   }
