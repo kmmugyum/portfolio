@@ -157,23 +157,38 @@
             <h3 style="margin:0 0 12px; font-size:clamp(17px,2.6vw,21px); line-height:1.35; letter-spacing:-.01em; font-weight:700; color:var(--text); word-break:keep-all;">{{ p.title }}</h3>
             <p style="margin:0; font-family:var(--sans); font-size:14.5px; line-height:1.72; color:var(--muted); max-width:64ch; word-break:keep-all;">{{ p.desc }}</p>
 
-            <sc-if value="{{ p.hasMetrics }}" hint-placeholder-val="{{ true }}">
-              <div style="margin-top:22px; display:flex; flex-wrap:wrap; gap:22px 44px;">
-                <sc-for list="{{ p.metrics }}" as="m" hint-placeholder-count="2">
-                  <div style="display:flex; flex-direction:column; gap:8px; min-width:180px;">
-                    <span data-count="{{ m.value }}" style="font-size:clamp(30px,4.6vw,40px); line-height:.95; font-weight:700; letter-spacing:-.02em; color:var(--accent); font-variant-numeric:tabular-nums;">{{ m.value }}</span>
-                    <sc-if value="{{ m.hasBar }}" hint-placeholder-val="{{ true }}">
-                      <span data-bar="{{ m.pct }}" style="font-size:12px; letter-spacing:.02em; color:var(--faint); white-space:pre; font-variant-numeric:tabular-nums;">{{ m.bar }}</span>
-                    </sc-if>
-                    <span style="font-size:12px; color:var(--faint);">{{ m.label }}</span>
-                  </div>
-                </sc-for>
-              </div>
-            </sc-if>
+            <div style="margin-top:22px; display:flex; flex-wrap:wrap; gap:22px 44px;">
+              <sc-for list="{{ p.metrics }}" as="m" hint-placeholder-count="2">
+                <div style="display:flex; flex-direction:column; gap:8px; min-width:180px;">
+                  <span data-count="{{ m.value }}" style="font-size:clamp(30px,4.6vw,40px); line-height:.95; font-weight:700; letter-spacing:-.02em; color:var(--accent); font-variant-numeric:tabular-nums;">{{ m.value }}</span>
+                  <sc-if value="{{ m.hasBar }}" hint-placeholder-val="{{ true }}">
+                    <span data-bar="{{ m.pct }}" style="font-size:12px; letter-spacing:.02em; color:var(--faint); white-space:pre; font-variant-numeric:tabular-nums;">{{ m.bar }}</span>
+                  </sc-if>
+                  <span style="font-size:12px; color:var(--faint);">{{ m.label }}</span>
+                </div>
+              </sc-for>
+            </div>
             <sc-if value="{{ p.note }}" hint-placeholder-val="{{ true }}">
               <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--line); font-size:13px; line-height:1.62; color:var(--muted);"><span style="font-family:var(--mono); color:var(--accent-dim);">#</span> <span style="font-family:var(--sans);">{{ p.note }}</span></div>
             </sc-if>
           </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- studies -->
+    <section data-reveal="1" style="padding:44px 0 8px; margin-top:44px; border-top:1px solid var(--line);">
+      <div style="font-size:13px; color:var(--muted); margin-bottom:6px;"><span style="color:var(--faint);">$</span> ls <span style="color:var(--accent);">studies/</span></div>
+      <div>
+        <sc-for list="{{ studies }}" as="s" hint-placeholder-count="1">
+          <div data-reveal="1" class="dc-skill-row" style="display:grid; grid-template-columns:minmax(120px,150px) 1fr; gap:12px 24px; padding:18px 0; border-top:1px solid var(--line);">
+            <span style="padding-top:2px; color:var(--accent); font-size:13px; font-variant-numeric:tabular-nums;">{{ s.period }}</span>
+            <div style="min-width:0;">
+              <div style="font-size:15px; font-weight:600; color:var(--text); word-break:keep-all;">{{ s.title }}</div>
+              <p style="margin:8px 0 0; font-family:var(--sans); font-size:13.5px; line-height:1.68; color:var(--muted); max-width:60ch; word-break:keep-all;">{{ s.desc }}</p>
+              <div style="margin-top:10px; font-size:12px; color:var(--faint);">{{ s.org }}</div>
+            </div>
+          </div>
         </sc-for>
       </div>
     </section>
@@ -390,9 +405,6 @@ class Component extends DCLogic {
     };
     const withMetrics = (list) => list.map(p => ({
       ...p,
-      // Cards without any metric must not render the metrics row at all, or its
-      // margin-top leaves dead space between the description and the note.
-      hasMetrics: p.metrics.length > 0,
       metrics: p.metrics.map(m => {
         const num = parseFloat((m.value.match(/([\d.]+)/) || [])[1]);
         const hasPct = /%/.test(m.value);
@@ -414,17 +426,19 @@ class Component extends DCLogic {
         { label: 'training', items: ['Weights & Biases'] },
         { label: 'devops', items: ['Git / GitHub'] },
       ],
+      // 시스템을 만든 것이 아니라 논문을 재현하고 뜯어본 작업. projects/ 와 층위가
+      // 달라 별도 섹션으로 분리한다.
+      studies: [
+        {
+          period: '2026.07 – 2026.08',
+          title: 'DDPM 재현 및 조건부 생성 분석',
+          desc: 'MNIST에서 DDPM을 from scratch로 재현하고, timestep-conditioning과 Classifier-Free Guidance가 생성 결과에 미치는 영향을 살펴봤다.',
+          org: 'UIUC Global SW/AI Talent Program · Romit Roy Choudhury 교수 지도',
+        },
+      ],
       projects: withMetrics([
         {
           no: '01',
-          title: 'DDPM 재현 및 조건부 생성 확장 연구',
-          period: '2026.07 – 2026.08', org: 'UIUC Global SW/AI Talent Program',
-          desc: 'MNIST에서 DDPM(Denoising Diffusion Probabilistic Models)을 from scratch로 재현하고 두 갈래로 확장했다. 첫째, timestep-conditioning이 signal preservation과 generation 사이에서 만드는 트레이드오프를 분석했다. 둘째, Classifier-Free Guidance 기반 class-conditioning이 pixel-level accuracy와 label-level identity를 어떻게 분리하는지 확인했다.',
-          metrics: [],
-          note: 'UIUC Grainger College of Engineering · Romit Roy Choudhury 교수 지도 · 프로그램 코호트 대상 최종 발표.',
-        },
-        {
-          no: '02',
           title: '방화벽 로그 기반 위협 트래픽 탐지 시스템',
           period: '2026.03 – 2026.06', org: 'ETRI 연계',
           desc: '방화벽 flow 로그를 SDS(Scan Detection Sketch)로 집계해 시간 비의존적 epoch 단위로 압축했다. 압축된 epoch에서 28차원 feature vector를 추출해, normal · scanning · C2_beacon · malware_delivery 4개 유형을 동시에 판정하는 multi-label 탐지 체계를 구축했다.',
@@ -435,7 +449,7 @@ class Component extends DCLogic {
           note: 'ClickHouse 기반 end-to-end 자동화 파이프라인 구축.',
         },
         {
-          no: '03',
+          no: '02',
           title: '세그멘테이션 기반 농경지 모니터링 시스템',
           period: '2023.06 – 2023.12', org: '딥챌린지랩 · 컨텍 기업연계',
           desc: '인공위성 영상에서 농경지를 세그멘테이션해 준실시간으로 상태 변화를 추적하는 시스템이다. UNet · SegFormer · HRNet · DeepLab을 비교해 모델을 선정했고, SIFT 기반 다중 위성영상 정합(registration)을 구현해 시점이 다른 영상을 정렬했다.',
