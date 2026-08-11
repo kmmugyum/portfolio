@@ -4,3 +4,5 @@
 .playwright-mcp/
 uploads/
 .thumbnail
+# 이력서 원본 문서 — 배포되는 것은 assets/resume.pdf 뿐이다.
+assets/Title.docx
