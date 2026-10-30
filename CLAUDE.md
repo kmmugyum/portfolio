@@ -24,7 +24,7 @@ The whole page is one file, `Portfolio.dc.html`, driven by `support.js`. Three c
 
 1. **`<x-dc>` template** — the markup, using `{{ expr }}` interpolation and inline `style`/`style-hover`/`onClick="{{ handler }}"` bindings. dc-runtime replaces `<x-dc>` with a `<div id="dc-root">` React root at boot.
 2. **`<script type="text/x-dc" data-dc-script>`** — a `class Component extends DCLogic` block. `DCLogic` is a React-component-like base with `state`, `setState`, `props`, and lifecycle. This component deliberately holds **no reactive state**: `componentDidMount` drives every animation through direct DOM manipulation, because a `setState` re-render would reset animated `textContent` mid-flight. Do not reintroduce `setState` here without re-checking the count-up / typing logic.
-3. **`renderVals()`** — the single method that returns the object bound into the template. **All page content — the `skills` and `projects` arrays, hover style objects — is hardcoded inside `renderVals()`.** To change portfolio copy/data, edit the arrays returned there, not the template.
+3. **`renderVals()`** — the single method that returns the object bound into the template. **All page content — the `skills`, `studies`, and `projects` arrays, hover style objects — is hardcoded inside `renderVals()`.** To change portfolio copy/data, edit the arrays returned there, not the template. `projects` is wrapped in `withMetrics([...])`, which derives the numeric count-up / progress-bar data from each metric's `value` string; `studies` (coursework/replication work such as the DDPM study) is a separate section without that wrapper.
 
 `data-props` on the script tag is a JSON schema (editor metadata + defaults). It currently declares `revealOnScroll` and `$preview` (design-canvas dimensions).
 
@@ -50,8 +50,10 @@ All listeners are registered with a shared `AbortController` signal and torn dow
 - `deploy.sh` — sync + verify + commit + push. The only sanctioned deployment path.
 - `support.js` — generated dc-runtime bundle (treat as read-only).
 - `assets/portrait.jpeg` — hero portrait referenced by the template.
-- `assets/resume.pdf` — linked by the `[ resume.pdf ]` hero button and by the GitHub profile README. **Not committed yet**; the button 404s until it is added.
+- `assets/resume.pdf` — linked by the `[ resume.pdf ]` hero button and by the GitHub profile README. Committed; re-export it from `assets/Title.docx` when the resume changes.
+- `assets/Title.docx` — source document for `resume.pdf`. Git-ignored; only the PDF is published.
 - `docs/specs/` — design specs (e.g. the terminal-redesign spec). Committed and authoritative.
 - `.nojekyll` — required so GitHub Pages serves the files as-is.
 - `uploads/` — git-ignored. Holds `증명사진.jpeg` (same as the portrait) and `DESIGN-apple.md`, an Apple-style design-system spec kept as a reference. Not available in a fresh clone.
 - `.thumbnail` — a WebP preview image (binary, despite the name). Git-ignored.
+- `.omc/`, `.claude/`, `.playwright-mcp/` — local tool state (agent memory/specs, Claude settings, Playwright logs). Git-ignored.
