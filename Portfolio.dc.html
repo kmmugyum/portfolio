@@ -1,8 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MuGyum Kim · 김무겸 — ML Researcher</title>
+<meta name="description" content="김무겸(MuGyum Kim) — 충남대학교 인공지능학과 DIPLAB 학부연구생. 컴퓨터 비전, 생성 모델, 이상 탐지 연구와 논문, 프로젝트.">
+<meta name="theme-color" content="#0b0d10">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MuGyum Kim · 김무겸 — ML Researcher">
+<meta property="og:description" content="Computer Vision & Foundations of Deep Learning · DIPLAB, Chungnam National University">
+<meta property="og:url" content="https://kmmugyum.github.io/portfolio/">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -12,449 +19,410 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    background: #08090b;
-  }
+  /* Hallmark · macrostructure: Long Document (man-page rail) · genre: editorial-dark
+   * theme: custom (near-black paper · cool greys · neon-green accent) · reveal: none
+   * replaces: design-v1-terminal (git tag) */
   :root {
-    --bg: #08090b;
-    --bg-2: #0f1114;
-    --bg-3: #14171b;
-    --text: #e6edf3;
-    --muted: #8b98a5;
-    --faint: #7b8896;
-    --line: #1b1f24;
-    --line-strong: #2a2f37;
-    --accent: #2ee6a6;
-    --accent-dim: #1a9d72;
-    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    --sans: "IBM Plex Sans", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  }
-  a { color: inherit; text-decoration: none; }
-  ::selection { background: var(--accent); color: #05100b; }
+    color-scheme: dark;
+    --color-paper:   oklch(14.5% 0.006 250);
+    --color-paper-2: oklch(17.5% 0.008 250);
+    --color-paper-3: oklch(21% 0.012 200);
+    --color-ink:     oklch(93% 0.008 240);
+    --color-ink-2:   oklch(72% 0.015 245);
+    --color-ink-3:   oklch(60% 0.015 245);
+    --color-rule:    oklch(26% 0.01 250);
+    --color-rule-2:  oklch(33% 0.012 250);
+    --color-accent:  oklch(84% 0.16 165);
+    --color-accent-ink: oklch(18% 0.04 165);
 
-  /* cursor blink */
-  @keyframes dc-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-  .dc-cursor {
-    display: inline-block; width: .62ch; height: 1.05em;
-    background: var(--accent); vertical-align: -.16em; margin-left: .1ch;
-    animation: dc-blink 1.05s steps(1) infinite;
-    box-shadow: 0 0 8px var(--accent);
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-sans: "IBM Plex Sans", "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+    --font-ko:   "Pretendard Variable", Pretendard, "IBM Plex Sans", -apple-system, system-ui, sans-serif;
+
+    --space-3xs: .25rem; --space-2xs: .5rem; --space-xs: .75rem; --space-sm: 1rem;
+    --space-md: 1.5rem; --space-lg: 2rem; --space-xl: 3rem; --space-2xl: 4.5rem; --space-3xl: 7rem;
+    --text-xs: .75rem; --text-sm: .875rem; --text-md: 1.0625rem; --text-lg: 1.375rem;
+    --text-display: clamp(2.5rem, 6vw, 4.25rem);
+
+    --document-width: 72ch;
+    --rail-width: 12rem;
+    --page-width: 74rem;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; overflow-x: clip; background: var(--color-paper); }
+  body {
+    color: var(--color-ink);
+    font-family: var(--font-ko);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 2px; }
+  ::selection { background: var(--color-accent); color: var(--color-accent-ink); }
+  h1, h2, h3 { text-wrap: balance; font-style: normal; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+    gap: var(--space-3xl);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-xl) var(--space-3xl);
+  }
+  .rail { align-self: start; position: sticky; top: var(--space-2xl); border-left: 1px solid var(--color-rule-2); padding-left: var(--space-md); }
+  .rail-prompt { margin: 0 0 var(--space-md); font: 500 var(--text-xs)/1.5 var(--font-mono); color: var(--color-ink-3); white-space: nowrap; }
+  .rail-prompt span { color: var(--color-accent); }
+  .rail nav { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
+  .rail a {
+    font: 500 var(--text-xs)/1.5 var(--font-mono); letter-spacing: .06em; text-decoration: none;
+    white-space: nowrap; color: var(--color-ink-3); transition: color 160ms cubic-bezier(.16,1,.3,1);
+  }
+  .rail a:hover, .rail a[aria-current="location"] { color: var(--color-accent); }
+
+  main { min-width: 0; max-width: var(--document-width); }
+  section { scroll-margin-top: var(--space-2xl); margin-bottom: var(--space-2xl); }
+  section#name { margin-bottom: var(--space-2xl); }
+  h1 { font-family: var(--font-sans); font-size: var(--text-display); font-weight: 600; line-height: 1.06; letter-spacing: -.04em; margin: 0 0 var(--space-2xs); }
+  .intro { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg); }
+  .portrait { display: block; flex: none; width: 104px; height: 124px; object-fit: cover; border-radius: 8px; border: 1px solid var(--color-rule-2); }
+  .name-ko { color: var(--color-ink-2); font-size: var(--text-lg); margin: 0; }
+  h2 { font: 600 var(--text-xs)/1.5 var(--font-mono); letter-spacing: .12em; color: var(--color-accent); margin: 0 0 var(--space-lg); }
+  h3 { font: 600 var(--text-lg)/1.45 var(--font-ko); margin: 0 0 var(--space-2xs); word-break: keep-all; }
+  p { margin: 0 0 var(--space-sm); overflow-wrap: anywhere; word-break: keep-all; }
+  .lede { font-size: var(--text-md); }
+  .muted { color: var(--color-ink-2); }
+  .icon-links { display: flex; flex-wrap: wrap; gap: var(--space-2xs); margin-top: var(--space-md); }
+  .icon-link {
+    display: inline-flex; align-items: center; gap: var(--space-2xs); min-height: 2.5rem; padding: 0 var(--space-xs);
+    border: 1px solid var(--color-rule-2); border-radius: 8px; text-decoration: none; color: var(--color-ink-2);
+    font: 500 var(--text-sm)/1 var(--font-mono); white-space: nowrap;
+    transition: color 160ms cubic-bezier(.16,1,.3,1), border-color 160ms cubic-bezier(.16,1,.3,1);
+  }
+  .icon-link:hover { color: var(--color-accent); border-color: var(--color-accent); }
+  .thumb {
+    display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover;
+    border-radius: 6px; border: 1px solid var(--color-rule-2); background: var(--color-ink);
+  }
+  .summary { margin: var(--space-2xs) 0 0; color: var(--color-ink-2); line-height: 1.6; }
+
+  .mono, .date, .meta { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .list { list-style: none; padding: 0; margin: 0; }
+  .news li { margin-bottom: var(--space-md); }
+  .date { display: block; font-size: var(--text-sm); color: var(--color-ink-3); margin-bottom: var(--space-3xs); }
+
+  /* Research entries: one panel per project so each reads as a unit; the headline
+   * figure sits top-right; the three parts get Korean labels and descending
+   * emphasis (problem muted → solution normal → result brightest). */
+  .entry {
+    margin-bottom: var(--space-lg); padding: var(--space-lg);
+    background: var(--color-paper-2); border: 1px solid var(--color-rule); border-radius: 10px;
+  }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-head {
+    display: grid; grid-template-columns: 10.5rem minmax(0, 1fr) auto; gap: var(--space-xs) var(--space-md);
+    align-items: start;
+  }
+  .entry-head > .entry-title:first-child { grid-column: 1 / 3; }
+  .more { margin-top: var(--space-md); border-top: 1px solid var(--color-rule); padding-top: var(--space-sm); }
+  .more > summary {
+    display: inline-flex; align-items: center; gap: var(--space-2xs); cursor: pointer; list-style: none;
+    font: 600 var(--text-sm)/1.5 var(--font-ko); color: var(--color-ink-2);
+    transition: color 160ms cubic-bezier(.16,1,.3,1);
+  }
+  .more > summary::-webkit-details-marker { display: none; }
+  .more > summary::before { content: "+"; font-family: var(--font-mono); color: var(--color-accent); width: 1ch; }
+  .more[open] > summary::before { content: "−"; }
+  .more > summary:hover { color: var(--color-ink); }
+  .more > summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 2px; }
+  .more-body { overflow: hidden; }
+  .more-body > .psr { padding-top: var(--space-md); }
+  .entry h3 { font-size: 1.375rem; margin: 0 0 var(--space-3xs); }
+  .meta { font-size: var(--text-sm); color: var(--color-ink-3); margin: 0; }
+  .meta .org { display: block; font-family: var(--font-ko); }
+  .meta .sep { display: none; }
+  .metric { text-align: right; }
+  .metric-value { display: block; font: 600 2rem/1.1 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--color-accent); letter-spacing: -.02em; }
+  .metric-label { display: block; font: 500 var(--text-xs)/1.5 var(--font-mono); color: var(--color-ink-3); margin-top: var(--space-3xs); }
+  .psr { margin: 0; display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-sm) var(--space-sm); }
+  .psr dt { font: 600 var(--text-sm)/1.65 var(--font-ko); }
+  .psr dd { margin: 0; min-width: 0; line-height: 1.65; }
+  .psr .t-problem { color: var(--color-ink-3); }
+  .psr .d-problem { color: var(--color-ink-2); }
+  .psr .t-solution { color: var(--color-ink-2); }
+  .psr .t-result { color: var(--color-accent); }
+  .psr .d-result { font-weight: 500; }
+  .psr .how { margin: 0 0 var(--space-3xs); font-weight: 600; word-break: keep-all; }
+  .bullets { list-style: none; margin: 0; padding: 0; }
+  .bullets li { position: relative; padding-left: 1em; word-break: keep-all; overflow-wrap: anywhere; }
+  .bullets li + li { margin-top: var(--space-3xs); }
+  .bullets li::before { content: "·"; position: absolute; left: .2em; color: var(--color-ink-3); font-weight: 700; }
+  .note { margin: var(--space-2xs) 0 0; font-size: var(--text-xs); line-height: 1.6; font-weight: 400; color: var(--color-ink-3); }
+  .takeaway {
+    margin: var(--space-md) 0 0; padding: var(--space-xs) var(--space-sm);
+    border-left: 2px solid var(--color-accent); background: var(--color-paper-3);
+    font-weight: 600; word-break: keep-all;
+  }
+
+  .citation { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: var(--space-md); align-items: start; }
+  .citation p { margin-bottom: var(--space-3xs); }
+  .citation .title { font-family: var(--font-sans); font-weight: 600; }
+  .citation strong { color: var(--color-ink); }
+  .citation .venue { font-size: var(--text-sm); color: var(--color-ink-2); }
+  .footnote { font-size: var(--text-xs); color: var(--color-ink-3); margin-top: var(--space-sm); }
+
+  .skills li { display: grid; grid-template-columns: minmax(0, 9rem) minmax(0, 1fr); gap: var(--space-md); align-items: baseline; margin-bottom: var(--space-2xs); }
+  .skills .label { font: 500 var(--text-sm)/1.6 var(--font-mono); color: var(--color-ink-3); }
+  .skills .items { font-family: var(--font-sans); line-height: 1.6; }
+
+  footer { margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--color-rule); font: 400 var(--text-xs)/1.6 var(--font-ko); color: var(--color-ink-3); }
+
+  @media (max-width: 720px) {
+    .layout { display: block; padding: 0 var(--space-md) var(--space-2xl); }
+    .rail {
+      position: sticky; top: 0; z-index: 2; margin: 0 calc(-1 * var(--space-md)) var(--space-xl);
+      padding: var(--space-sm) var(--space-md); border: 0; border-bottom: 1px solid var(--color-rule);
+      background: var(--color-paper); overflow-x: auto;
+    }
+    .rail-prompt { display: none; }
+    .rail nav { flex-direction: row; width: max-content; gap: var(--space-md); }
+    section { margin-bottom: var(--space-2xl); }
+    .entry { padding: var(--space-md); }
+    .entry-head { grid-template-columns: minmax(0, 1fr); }
+    .entry-head > .entry-title:first-child { grid-column: auto; }
+    .citation { grid-template-columns: minmax(0, 1fr); }
+    .thumb { max-width: 16rem; }
+    .metric { text-align: left; }
+    .psr { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .psr dt { margin-top: var(--space-sm); }
+    .psr dt:first-child { margin-top: 0; }
+    .skills li { grid-template-columns: minmax(0, 1fr); gap: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .dc-cursor { animation: none; }
-    /* Safety net: JS injects inline transitions (reveal, tilt) that this rule
-       must still be able to neutralise if any path reaches them. */
-    *, *::before, *::after {
-      animation-duration: .01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: .01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-  @media (max-width: 560px) {
-    .dc-skill-row { grid-template-columns: 1fr !important; gap: 10px 0 !important; }
+    *, *::before, *::after { transition-duration: .01ms !important; }
   }
 </style>
 </helmet>
 
-<div style="position:relative; min-height:100vh; background:var(--bg); color:var(--text); overflow:hidden;">
-  <!-- grid backdrop -->
-  <div aria-hidden="true" style="position:fixed; inset:0; pointer-events:none; background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size:48px 48px; opacity:.45; mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 100%); -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 100%);"></div>
-  <!-- mouse spotlight -->
-  <div id="dc-spot" aria-hidden="true" style="position:fixed; inset:0; pointer-events:none; z-index:0; transition:background .18s ease; background:radial-gradient(600px circle at 50% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 60%);"></div>
+<div class="layout">
+  <aside class="rail" aria-label="목차">
+    <p class="rail-prompt"><span>~/mugyum</span> $ man cv</p>
+    <nav aria-label="섹션">
+      <a href="#name">NAME</a>
+      <a href="#news">NEWS</a>
+      <a href="#publications">PUBLICATIONS</a>
+      <a href="#research">RESEARCH</a>
+      <a href="#studies">STUDIES</a>
+      <a href="#skills">SKILLS</a>
+    </nav>
+  </aside>
 
-  <div style="position:relative; z-index:1; width:min(860px, 100% - 40px); margin:0 auto; padding:0;">
-
-    <!-- top prompt bar -->
-    <header style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:22px 0 0; font-size:13px;">
-      <span style="color:var(--muted);"><span style="color:var(--accent);">~/portfolio</span> <span style="color:var(--faint);">$</span> whoami</span>
-      <span style="display:inline-flex; align-items:center; gap:8px; color:var(--faint); font-size:12px;">
-        <span style="width:7px; height:7px; border-radius:999px; background:var(--accent); box-shadow:0 0 8px var(--accent);"></span>online
-      </span>
-    </header>
-
-    <!-- hero -->
-    <section data-reveal="1" style="padding:52px 0 60px; border-bottom:1px solid var(--line);">
-      <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:28px;">
-        <img src="assets/portrait.jpeg" alt="김무겸 증명사진" width="104" height="124" style="display:block; width:104px; height:124px; object-fit:cover; object-position:50% 16%; border-radius:6px; border:1px solid var(--line-strong); background:var(--bg-2); box-shadow:0 0 0 4px var(--bg-2);">
-        <div style="min-width:0; flex:1;">
-          <div style="font-size:12px; color:var(--faint); margin-bottom:10px;"><span style="color:var(--accent);">const</span> researcher <span style="color:var(--faint);">=</span></div>
-          <h1 style="margin:0; font-size:clamp(38px,7vw,64px); font-weight:700; line-height:1.02; letter-spacing:-.02em; color:var(--text);"><span id="dc-name" data-type="MuGyum Kim">MuGyum Kim</span><span id="dc-name-cur" class="dc-cursor" style="display:none;"></span></h1>
-          <div style="margin-top:14px; font-size:clamp(15px,2.4vw,18px); color:var(--muted); min-height:1.4em;"><span style="color:var(--accent);">&gt;</span> <span id="dc-tag" data-type="Computer Vision &amp; Foundations of Deep Learning">Computer Vision &amp; Foundations of Deep Learning</span><span id="dc-tag-cur" class="dc-cursor" style="height:.95em;"></span></div>
+  <main>
+    <section id="name">
+      <h2>NAME</h2>
+      <div class="intro">
+        <img class="portrait" src="assets/portrait-sm.jpg" alt="김무겸 증명사진" width="104" height="124" fetchpriority="high">
+        <div>
+          <h1>MuGyum Kim</h1>
+          <p class="name-ko">김무겸</p>
         </div>
       </div>
-
-      <div style="margin-top:38px; display:grid; grid-template-columns:auto 1fr; gap:8px 20px; align-items:baseline; font-size:13.5px; line-height:1.55;">
-        <span style="color:var(--accent);">lab</span>
-        <span style="color:var(--text);">충남대학교 인공지능학과 · DIPLAB <span style="color:var(--faint);">Deep Challenge Lab</span></span>
-        <span style="color:var(--accent);">univ</span>
-        <span style="color:var(--muted);">Chungnam National University, Dept. of Artificial Intelligence</span>
-        <span style="color:var(--accent);">status</span>
-        <span style="color:var(--muted);">Undergraduate Researcher · 재학 중 · 2028.02 졸업 예정</span>
-      </div>
-
-      <div style="margin-top:36px; display:flex; flex-wrap:wrap; gap:12px;">
-        <a href="mailto:mugyumk@gmail.com" data-glow="1" style="display:inline-flex; align-items:center; height:46px; padding:0 20px; background:var(--accent); color:#05100b; border-radius:6px; font-size:14px; font-weight:600; transition:box-shadow .2s ease, transform .2s ease;" style-hover="{{ inkHover }}">[ email ]</a>
-        <a href="https://github.com/kmmugyum" target="_blank" rel="noopener" data-glow="1" style="display:inline-flex; align-items:center; gap:9px; height:46px; padding:0 20px; background:transparent; color:var(--text); border:1px solid var(--line-strong); border-radius:6px; font-size:14px; font-weight:600; transition:border-color .2s ease, box-shadow .2s ease, color .2s ease;" style-hover="{{ ghostHover }}">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          [ github ]
-        </a>
-        <a href="assets/resume.pdf" target="_blank" rel="noopener" data-glow="1" style="display:inline-flex; align-items:center; gap:9px; height:46px; padding:0 20px; background:transparent; color:var(--text); border:1px solid var(--line-strong); border-radius:6px; font-size:14px; font-weight:600; transition:border-color .2s ease, box-shadow .2s ease, color .2s ease;" style-hover="{{ ghostHover }}">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
-          [ resume.pdf ]
-        </a>
-        <a href="https://small0753.tistory.com/" target="_blank" rel="noopener noreferrer" data-glow="1" style="display:inline-flex; align-items:center; gap:9px; height:46px; padding:0 20px; background:transparent; color:var(--text); border:1px solid var(--line-strong); border-radius:6px; font-size:14px; font-weight:600; transition:border-color .2s ease, box-shadow .2s ease, color .2s ease;" style-hover="{{ ghostHover }}">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg>
-          [ blog ]
-        </a>
-        <a href="https://www.linkedin.com/in/mugyum-kim/" target="_blank" rel="noopener noreferrer" data-glow="1" style="display:inline-flex; align-items:center; gap:9px; height:46px; padding:0 20px; background:transparent; color:var(--text); border:1px solid var(--line-strong); border-radius:6px; font-size:14px; font-weight:600; transition:border-color .2s ease, box-shadow .2s ease, color .2s ease;" style-hover="{{ ghostHover }}">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.63 13.63h-2.37V9.9c0-.89-.02-2.03-1.24-2.03-1.24 0-1.43.97-1.43 1.97v3.79H6.22V5.97h2.28v1.05h.03c.32-.6 1.09-1.24 2.25-1.24 2.4 0 2.85 1.58 2.85 3.64v4.21zM3.56 4.92a1.38 1.38 0 1 1 0-2.76 1.38 1.38 0 0 1 0 2.76zm1.19 8.71H2.37V5.97h2.38v7.66zM14.82 0H1.18C.53 0 0 .52 0 1.16v13.68C0 15.48.53 16 1.18 16h13.64c.65 0 1.18-.52 1.18-1.16V1.16C16 .52 15.47 0 14.82 0z"/></svg>
-          [ linkedin ]
-        </a>
-      </div>
-      <div style="margin-top:16px; font-size:12.5px; color:var(--faint); display:flex; flex-wrap:wrap; gap:6px 20px;">
-        <span style="display:inline-flex; align-items:center; gap:8px;"><span style="color:var(--accent-dim);">&#9656;</span>mugyumk@gmail.com</span>
-        <span style="display:inline-flex; align-items:center; gap:8px;"><span style="color:var(--accent-dim);">&#9656;</span>github.com/kmmugyum</span>
-      </div>
+      <p class="lede">Computer Vision &amp; Foundations of Deep Learning</p>
+      <p class="muted">충남대학교 인공지능학과 DIPLAB(Deep Challenge Lab) 학부연구생 · 2028년 2월 졸업 예정</p>
+      <p class="muted">Chungnam National University, Dept. of Artificial Intelligence</p>
+      <nav class="icon-links" aria-label="연락처와 링크">
+        <a class="icon-link" href="mailto:mugyumk@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>email</span></a>
+        <a class="icon-link" href="https://github.com/kmmugyum" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span>github</span></a>
+        <a class="icon-link" href="assets/resume.pdf" aria-label="Résumé (PDF)" title="Résumé (PDF)" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg><span>resume</span></a>
+        <a class="icon-link" href="https://small0753.tistory.com/" aria-label="Blog" title="Blog" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg><span>blog</span></a>
+        <a class="icon-link" href="https://www.linkedin.com/in/mugyum-kim/" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.63 13.63h-2.37V9.9c0-.89-.02-2.03-1.24-2.03-1.24 0-1.43.97-1.43 1.97v3.79H6.22V5.97h2.28v1.05h.03c.32-.6 1.09-1.24 2.25-1.24 2.4 0 2.85 1.58 2.85 3.64v4.21zM3.56 4.92a1.38 1.38 0 1 1 0-2.76 1.38 1.38 0 0 1 0 2.76zm1.19 8.71H2.37V5.97h2.38v7.66zM14.82 0H1.18C.53 0 0 .52 0 1.16v13.68C0 15.48.53 16 1.18 16h13.64c.65 0 1.18-.52 1.18-1.16V1.16C16 .52 15.47 0 14.82 0z"/></svg><span>linkedin</span></a>
+      </nav>
     </section>
 
-    <!-- news -->
-    <section data-reveal="1" style="padding:44px 0; border-bottom:1px solid var(--line);">
-      <div style="font-size:13px; color:var(--muted); margin-bottom:16px;"><span style="color:var(--faint);">$</span> tail <span style="color:var(--accent);">news.log</span></div>
-      <div>
+    <section id="news">
+      <h2>NEWS</h2>
+      <ul class="list news">
         <sc-for list="{{ news }}" as="n" hint-placeholder-count="4">
-          <div class="dc-skill-row" style="display:grid; grid-template-columns:minmax(110px,130px) 1fr; gap:6px 24px; padding:12px 0; border-top:1px solid var(--line); font-size:13.5px; line-height:1.6;">
-            <span style="color:var(--accent); font-variant-numeric:tabular-nums;">{{ n.date }}</span>
-            <span style="font-family:var(--sans); color:var(--muted); word-break:keep-all;">{{ n.text }}</span>
-          </div>
+          <li><span class="date">{{ n.date }}</span><span>{{ n.text }}</span></li>
         </sc-for>
-      </div>
+      </ul>
     </section>
 
-    <!-- publications -->
-    <section data-reveal="1" style="padding:44px 0; border-bottom:1px solid var(--line);">
-      <div style="font-size:13px; color:var(--muted); margin-bottom:16px;"><span style="color:var(--faint);">$</span> ls <span style="color:var(--accent);">publications/</span></div>
-      <div>
-        <sc-for list="{{ publications }}" as="pub" hint-placeholder-count="1">
-          <div class="dc-skill-row" style="display:grid; grid-template-columns:minmax(110px,130px) 1fr; gap:6px 24px; padding:14px 0; border-top:1px solid var(--line);">
-            <span style="padding-top:2px; color:var(--accent); font-size:13px; font-variant-numeric:tabular-nums;">{{ pub.year }}</span>
-            <div style="min-width:0;">
-              <div style="font-size:15px; font-weight:600; line-height:1.45; color:var(--text); word-break:keep-all;">{{ pub.title }}</div>
-              <div style="margin-top:6px; font-family:var(--sans); font-size:13.5px; color:var(--muted);">{{ pub.authorsBefore }}<span style="color:var(--text); font-weight:600;">{{ pub.self }}</span>{{ pub.authorsAfter }}</div>
-              <div style="margin-top:4px; font-size:12.5px; color:var(--faint);">{{ pub.venue }}</div>
-            </div>
+    <section id="publications">
+      <h2>PUBLICATIONS</h2>
+      <sc-for list="{{ publications }}" as="pub" hint-placeholder-count="1">
+        <article class="citation">
+          <img class="thumb" src="{{ pub.thumb }}" alt="{{ pub.thumbAlt }}" width="480" height="320" loading="lazy" decoding="async">
+          <div>
+            <p class="title">{{ pub.title }}</p>
+            <p>{{ pub.authorsBefore }}<strong>{{ pub.self }}</strong>{{ pub.authorsAfter }}</p>
+            <p class="venue">{{ pub.venue }}</p>
+            <p class="summary">{{ pub.summary }}</p>
           </div>
-        </sc-for>
-      </div>
-      <div style="margin-top:10px; font-size:12px; color:var(--faint);">* presenting author · † corresponding author</div>
+        </article>
+      </sc-for>
+      <p class="footnote">* presenting author · † corresponding author</p>
     </section>
 
-    <!-- projects -->
-    <section style="padding:52px 0 8px;">
-      <div style="font-size:13px; color:var(--muted); margin-bottom:22px;"><span style="color:var(--faint);">$</span> ls <span style="color:var(--accent);">projects/</span></div>
-      <div style="display:flex; flex-direction:column; gap:18px;">
-        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
-          <article data-reveal="1" data-card="1" style="position:relative; padding:26px 26px 28px; border:1px solid var(--line-strong); border-radius:10px; background:var(--bg-2); transition:border-color .22s ease, box-shadow .22s ease, transform .22s ease; transform-style:preserve-3d;">
-            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:14px;">
-              <span style="font-size:13px; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums;">[{{ p.no }}]</span>
-              <span style="font-size:12px; color:var(--faint); text-align:right; font-variant-numeric:tabular-nums;">{{ p.period }} · {{ p.org }}</span>
-            </div>
-            <h3 style="margin:0 0 12px; font-size:clamp(17px,2.6vw,21px); line-height:1.35; letter-spacing:-.01em; font-weight:700; color:var(--text); word-break:keep-all;">{{ p.title }}</h3>
-            <p style="margin:0; font-family:var(--sans); font-size:14.5px; line-height:1.72; color:var(--muted); max-width:64ch; word-break:keep-all;">{{ p.desc }}</p>
-
-            <div style="margin-top:22px; display:flex; flex-wrap:wrap; gap:22px 44px;">
-              <sc-for list="{{ p.metrics }}" as="m" hint-placeholder-count="2">
-                <div style="display:flex; flex-direction:column; gap:8px; min-width:180px;">
-                  <span data-count="{{ m.value }}" style="font-size:clamp(30px,4.6vw,40px); line-height:.95; font-weight:700; letter-spacing:-.02em; color:var(--accent); font-variant-numeric:tabular-nums;">{{ m.value }}</span>
-                  <sc-if value="{{ m.hasBar }}" hint-placeholder-val="{{ true }}">
-                    <span data-bar="{{ m.pct }}" style="font-size:12px; letter-spacing:.02em; color:var(--faint); white-space:pre; font-variant-numeric:tabular-nums;">{{ m.bar }}</span>
-                  </sc-if>
-                  <span style="font-size:12px; color:var(--faint);">{{ m.label }}</span>
-                </div>
-              </sc-for>
-            </div>
-            <sc-if value="{{ p.note }}" hint-placeholder-val="{{ true }}">
-              <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--line); font-size:13px; line-height:1.62; color:var(--muted);"><span style="font-family:var(--mono); color:var(--accent-dim);">#</span> <span style="font-family:var(--sans);">{{ p.note }}</span></div>
+    <section id="research">
+      <h2>RESEARCH</h2>
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
+        <article class="entry">
+          <header class="entry-head">
+            <sc-if value="{{ p.thumb }}" hint-placeholder-val="{{ true }}">
+              <img class="thumb" src="{{ p.thumb }}" alt="{{ p.thumbAlt }}" width="480" height="320" loading="lazy" decoding="async">
             </sc-if>
-          </article>
-        </sc-for>
-      </div>
-    </section>
-
-    <!-- studies -->
-    <section data-reveal="1" style="padding:44px 0 8px; margin-top:44px; border-top:1px solid var(--line);">
-      <div style="font-size:13px; color:var(--muted); margin-bottom:6px;"><span style="color:var(--faint);">$</span> ls <span style="color:var(--accent);">studies/</span></div>
-      <div>
-        <sc-for list="{{ studies }}" as="s" hint-placeholder-count="1">
-          <div data-reveal="1" class="dc-skill-row" style="display:grid; grid-template-columns:minmax(120px,150px) 1fr; gap:12px 24px; padding:18px 0; border-top:1px solid var(--line);">
-            <span style="padding-top:2px; color:var(--accent); font-size:13px; font-variant-numeric:tabular-nums;">{{ s.period }}</span>
-            <div style="min-width:0;">
-              <div style="font-size:15px; font-weight:600; color:var(--text); word-break:keep-all;">{{ s.title }}</div>
-              <p style="margin:8px 0 0; font-family:var(--sans); font-size:13.5px; line-height:1.68; color:var(--muted); max-width:60ch; word-break:keep-all;">{{ s.desc }}</p>
-              <div style="margin-top:10px; font-size:12px; color:var(--faint);">{{ s.org }}</div>
+            <div class="entry-title">
+              <h3>{{ p.title }}</h3>
+              <p class="meta">{{ p.period }}<span class="sep"> · </span><span class="org">{{ p.org }}</span></p>
+              <p class="summary">{{ p.summary }}</p>
             </div>
-          </div>
-        </sc-for>
-      </div>
+            <sc-if value="{{ p.metric }}" hint-placeholder-val="{{ true }}">
+              <div class="metric"><span class="metric-value">{{ p.metric }}</span><span class="metric-label">{{ p.metricLabel }}</span></div>
+            </sc-if>
+          </header>
+          <sc-if value="{{ p.takeaway }}" hint-placeholder-val="{{ true }}">
+            <p class="takeaway">{{ p.takeaway }}</p>
+          </sc-if>
+          <details class="more">
+            <summary>문제 · 해결 · 결과</summary>
+            <div class="more-body"><dl class="psr">
+              <dt class="t-problem">문제</dt>
+              <dd class="d-problem"><ul class="bullets"><sc-for list="{{ p.problem }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for></ul></dd>
+              <dt class="t-solution">해결</dt>
+              <dd><p class="how">{{ p.how }}</p><ul class="bullets"><sc-for list="{{ p.solution }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for></ul></dd>
+              <dt class="t-result">결과</dt>
+              <dd class="d-result">
+                <ul class="bullets"><sc-for list="{{ p.result }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for></ul>
+                <sc-if value="{{ p.note }}" hint-placeholder-val="{{ true }}"><p class="note">※ {{ p.note }}</p></sc-if>
+              </dd>
+            </dl></div>
+          </details>
+        </article>
+      </sc-for>
     </section>
 
-    <!-- skills -->
-    <section data-reveal="1" style="padding:44px 0 8px; margin-top:44px; border-top:1px solid var(--line);">
-      <div style="font-size:13px; color:var(--muted); margin-bottom:28px;"><span style="color:var(--faint);">$</span> ls <span style="color:var(--accent);">skills/</span></div>
-      <div>
+    <section id="studies">
+      <h2>STUDIES</h2>
+      <sc-for list="{{ studies }}" as="p" hint-placeholder-count="1">
+        <article class="entry">
+          <header class="entry-head">
+            <sc-if value="{{ p.thumb }}" hint-placeholder-val="{{ true }}">
+              <img class="thumb" src="{{ p.thumb }}" alt="{{ p.thumbAlt }}" width="480" height="320" loading="lazy" decoding="async">
+            </sc-if>
+            <div class="entry-title">
+              <h3>{{ p.title }}</h3>
+              <p class="meta">{{ p.period }}<span class="sep"> · </span><span class="org">{{ p.org }}</span></p>
+              <p class="summary">{{ p.summary }}</p>
+            </div>
+            <sc-if value="{{ p.metric }}" hint-placeholder-val="{{ true }}">
+              <div class="metric"><span class="metric-value">{{ p.metric }}</span><span class="metric-label">{{ p.metricLabel }}</span></div>
+            </sc-if>
+          </header>
+          <sc-if value="{{ p.takeaway }}" hint-placeholder-val="{{ true }}">
+            <p class="takeaway">{{ p.takeaway }}</p>
+          </sc-if>
+          <details class="more">
+            <summary>문제 · 해결 · 결과</summary>
+            <div class="more-body"><dl class="psr">
+              <dt class="t-problem">문제</dt>
+              <dd class="d-problem"><ul class="bullets"><sc-for list="{{ p.problem }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for></ul></dd>
+              <dt class="t-solution">해결</dt>
+              <dd><p class="how">{{ p.how }}</p><ul class="bullets"><sc-for list="{{ p.solution }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for></ul></dd>
+              <dt class="t-result">결과</dt>
+              <dd class="d-result">
+                <ul class="bullets"><sc-for list="{{ p.result }}" as="b" hint-placeholder-count="2"><li>{{ b }}</li></sc-for></ul>
+                <sc-if value="{{ p.note }}" hint-placeholder-val="{{ true }}"><p class="note">※ {{ p.note }}</p></sc-if>
+              </dd>
+            </dl></div>
+          </details>
+        </article>
+      </sc-for>
+    </section>
+
+    <section id="skills">
+      <h2>SKILLS</h2>
+      <ul class="list skills">
         <sc-for list="{{ skills }}" as="cat" hint-placeholder-count="6">
-          <div data-reveal="1" class="dc-skill-row" style="display:grid; grid-template-columns:minmax(140px,180px) 1fr; gap:12px 24px; padding:18px 0; border-top:1px solid var(--line);">
-            <div style="display:flex; align-items:center; gap:10px; padding-top:3px; color:var(--muted); font-size:13.5px;">
-              <span style="color:var(--accent); flex:none;">[</span><span style="font-weight:600;">{{ cat.label }}</span><span style="color:var(--accent); flex:none;">]</span>
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;">
-              <sc-for list="{{ cat.items }}" as="item" hint-placeholder-count="3">
-                <span data-glow="1" style="display:inline-flex; align-items:center; min-height:32px; padding:0 12px; font-size:13px; color:var(--text); background:var(--bg-2); border:1px solid var(--line-strong); border-radius:5px; white-space:nowrap; transition:border-color .18s ease, box-shadow .18s ease, color .18s ease;" style-hover="{{ chipHover }}">{{ item }}</span>
-              </sc-for>
-            </div>
-          </div>
+          <li><span class="label">{{ cat.label }}</span><span class="items">{{ cat.items }}</span></li>
         </sc-for>
-      </div>
+      </ul>
     </section>
 
-    <!-- footer -->
-    <footer style="padding:44px 0 60px; border-top:1px solid var(--line); margin-top:44px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; font-size:12.5px;">
-      <div style="color:var(--muted);"><span style="color:var(--faint);">$</span> exit<span class="dc-cursor" style="height:.95em;"></span> <span style="color:var(--faint);">— 김무겸 · MuGyum Kim © 2026</span></div>
-      <div style="display:flex; gap:18px;">
-        <a href="mailto:mugyumk@gmail.com" style="color:var(--muted); border-bottom:1px solid var(--accent-dim); transition:color .18s ease;" style-hover="{{ linkHover }}">email</a>
-        <a href="https://github.com/kmmugyum" target="_blank" rel="noopener" style="color:var(--muted); border-bottom:1px solid var(--accent-dim); transition:color .18s ease;" style-hover="{{ linkHover }}">github</a>
-        <a href="https://www.linkedin.com/in/mugyum-kim/" target="_blank" rel="noopener noreferrer" style="color:var(--muted); border-bottom:1px solid var(--accent-dim); transition:color .18s ease;" style-hover="{{ linkHover }}">linkedin</a>
-      </div>
-    </footer>
-
-  </div>
+    <footer>MuGyum Kim · 김무겸 · © 2026</footer>
+  </main>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:860,&quot;height&quot;:1300},&quot;revealOnScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:1300}}">
 class Component extends DCLogic {
-  // No reactive state: dc-runtime renders once, then all animation is pure DOM.
-  // This avoids setState re-renders resetting animated textContent mid-flight.
+  // No reactive state and no entrance animation: the page is just there.
+  // Behaviour: highlight the current section in the TOC rail, and open/close
+  // the 문제 · 해결 · 결과 <details> like a curtain (height + opacity) instead of
+  // the native instant toggle. Reduced-motion users keep the native toggle.
 
   componentDidMount() {
-    // Single abort signal for every listener registered below, so unmount can
-    // tear them all down without needing named handler references.
     this._ac = new AbortController();
     this.reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    // Touch/coarse-pointer devices: no hover cursor, so pointer-driven effects
-    // (spotlight, tilt) are meaningless; typing also causes layout jump when the
-    // tagline wraps to multiple lines on narrow screens.
-    this.touch = !!(window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches);
-    const motion = !this.reduced && (this.props.revealOnScroll ?? true) !== false;
-
-    // typing targets (default text is already in the DOM as a fallback)
     requestAnimationFrame(() => {
-      if (!motion) { this.revealAll(); this.fillMetricsInstant(); return; }
-      // Pointer-driven effects only on devices with a real cursor.
-      if (!this.touch) {
-        this.setupSpotlight();
-        this.setupTilt();
-      }
-      this.setupReveal();
-
-      const name = document.getElementById('dc-name');
-      const nameCur = document.getElementById('dc-name-cur');
-      const tag = document.getElementById('dc-tag');
-      const tagCur = document.getElementById('dc-tag-cur');
-
-      // On touch screens, skip typing so the wrapping tagline doesn't grow the
-      // hero height mid-animation and shove the page around. Show final text,
-      // hide the (now-static) cursors.
-      if (this.touch) {
-        if (name) name.textContent = name.getAttribute('data-type') || name.textContent;
-        if (tag) tag.textContent = tag.getAttribute('data-type') || tag.textContent;
-        if (nameCur) nameCur.style.display = 'none';
-        if (tagCur) tagCur.style.display = 'none';
-        return;
-      }
-
-      if (tagCur) tagCur.style.display = 'none';
-      if (nameCur) nameCur.style.display = 'inline-block';
-      this.typeInto(name, () => {
-        if (nameCur) nameCur.style.display = 'none';
-        if (tagCur) tagCur.style.display = 'inline-block';
-        this.typeInto(tag, () => {}, 26);
-      }, 62);
+      this.setupDisclosures();
+      this.setupRail();
     });
   }
 
   componentWillUnmount() {
-    // Tear down everything componentDidMount started: listeners (via the shared
-    // abort signal), the pending typing timer, and the reveal observer.
     if (this._ac) this._ac.abort();
-    if (this._t) clearTimeout(this._t);
     if (this._io) this._io.disconnect();
   }
 
-  typeInto(node, onDone, speed) {
-    if (!node) { onDone && onDone(); return; }
-    const text = node.getAttribute('data-type') || node.textContent;
-    node.textContent = '';
-    let i = 0;
-    const step = () => {
-      i++;
-      node.textContent = text.slice(0, i);
-      if (i >= text.length) { onDone && onDone(); return; }
-      this._t = setTimeout(step, speed);
-    };
-    this._t = setTimeout(step, speed);
-  }
-
-  revealAll() {
-    document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
-  }
-
-  setupReveal() {
-    const els = Array.from(document.querySelectorAll('[data-reveal]'));
-    // On touch screens use a fade-only reveal — no translateY — so nothing
-    // shifts vertically as sections appear.
-    const shift = this.touch ? 'none' : 'translateY(18px)';
-    els.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = shift;
-      el.style.transition = 'opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1)';
+  setupRail() {
+    if (!('IntersectionObserver' in window)) return;
+    const links = Array.from(document.querySelectorAll('.rail a[href^="#"]'));
+    const byId = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+    const mark = (id) => links.forEach(a => {
+      if (a === byId.get(id)) a.setAttribute('aria-current', 'location');
+      else a.removeAttribute('aria-current');
     });
-    const done = (el) => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      el.querySelectorAll && el.querySelectorAll('[data-count]').forEach(n => this.countUp(n));
-      el.querySelectorAll && el.querySelectorAll('[data-bar]').forEach(n => this.animateBar(n));
-    };
-    if (!('IntersectionObserver' in window)) { els.forEach(done); return; }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { done(e.target); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-    this._io = io;
-    els.forEach(el => io.observe(el));
+    this._io = new IntersectionObserver((entries) => {
+      const hit = entries.filter(e => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (hit) mark(hit.target.id);
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    byId.forEach((_, id) => { const s = document.getElementById(id); if (s) this._io.observe(s); });
   }
 
-  countUp(node) {
-    if (node._done) return; node._done = true;
-    const raw = node.getAttribute('data-count') || '';
-    const m = raw.match(/([\d.]+)/);
-    if (!m) return;
-    const target = parseFloat(m[1]);
-    const decimals = (m[1].split('.')[1] || '').length;
-    const prefix = raw.slice(0, m.index);
-    const suffix = raw.slice(m.index + m[1].length);
-    const dur = 900, t0 = performance.now();
-    const tick = (t) => {
-      if (node._settled) return;
-      const p = Math.min(1, (t - t0) / dur);
-      if (p >= 1) { node.textContent = raw; node._settled = true; return; }
-      const eased = 1 - Math.pow(1 - p, 3);
-      node.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-    // safety net: force final value even if rAF stalls
-    setTimeout(() => { if (!node._settled) { node.textContent = raw; node._settled = true; } }, dur + 80);
-  }
-
-  barText(pct, CELLS) {
-    const full = Math.round((pct / 100) * CELLS);
-    return '█'.repeat(full) + '░'.repeat(CELLS - full) + ' ' + pct + '%';
-  }
-
-  animateBar(node) {
-    if (node._done) return; node._done = true;
-    const CELLS = 16;
-    const attr = node.getAttribute('data-bar');
-    if (attr === null || attr === '') return; // no-percentage metric: leave blank
-    const pct = Math.max(0, Math.min(100, parseFloat(attr) || 0));
-    const finalText = this.barText(pct, CELLS);
-    const dur = 900, t0 = performance.now();
-    const tick = (t) => {
-      if (node._settled) return;
-      const p = Math.min(1, (t - t0) / dur);
-      if (p >= 1) { node.textContent = finalText; node._settled = true; return; }
-      const eased = 1 - Math.pow(1 - p, 3);
-      const filled = Math.round((pct / 100) * CELLS * eased);
-      node.textContent = '█'.repeat(filled) + '░'.repeat(CELLS - filled) + ' ' + Math.round(pct * eased) + '%';
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-    setTimeout(() => { if (!node._settled) { node.textContent = finalText; node._settled = true; } }, dur + 80);
-  }
-
-  fillMetricsInstant() {
-    document.querySelectorAll('[data-bar]').forEach(node => {
-      const attr = node.getAttribute('data-bar');
-      if (attr === null || attr === '') return;
-      const pct = Math.max(0, Math.min(100, parseFloat(attr) || 0));
-      node.textContent = this.barText(pct, 16);
-    });
-  }
-
-  setupSpotlight() {
-    const spot = () => document.getElementById('dc-spot');
-    this._onMove = (e) => {
-      const el = spot(); if (!el) return;
-      el.style.background = 'radial-gradient(600px circle at ' + e.clientX + 'px ' + e.clientY + 'px, color-mix(in srgb, var(--accent) 10%, transparent), transparent 55%)';
-    };
-    window.addEventListener('pointermove', this._onMove, { passive: true, signal: this._ac.signal });
-  }
-
-  setupTilt() {
-    requestAnimationFrame(() => {
-      document.querySelectorAll('[data-card]').forEach(card => {
-        card.addEventListener('pointermove', (e) => {
-          const r = card.getBoundingClientRect();
-          const px = (e.clientX - r.left) / r.width - 0.5;
-          const py = (e.clientY - r.top) / r.height - 0.5;
-          card.style.transform = 'perspective(900px) rotateX(' + (-py * 4).toFixed(2) + 'deg) rotateY(' + (px * 5).toFixed(2) + 'deg) translateY(-2px)';
-          card.style.borderColor = 'var(--accent)';
-          card.style.boxShadow = '0 12px 40px -12px color-mix(in srgb, var(--accent) 40%, transparent)';
-        }, { signal: this._ac.signal });
-        card.addEventListener('pointerleave', () => {
-          card.style.transform = 'none';
-          card.style.borderColor = 'var(--line-strong)';
-          card.style.boxShadow = 'none';
-        }, { signal: this._ac.signal });
-      });
+  setupDisclosures() {
+    if (this.reduced || !Element.prototype.animate) return;
+    const ease = 'cubic-bezier(.16, 1, .3, 1)';
+    document.querySelectorAll('details.more').forEach((d) => {
+      const summary = d.querySelector('summary');
+      const body = d.querySelector('.more-body');
+      if (!summary || !body) return;
+      summary.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (d._anim) d._anim.cancel();
+        if (d.open) {
+          const h = body.offsetHeight;
+          d._anim = body.animate([{ height: h + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 240, easing: ease });
+          d._anim.onfinish = () => { d.open = false; d._anim = null; };
+        } else {
+          d.open = true;
+          const h = body.offsetHeight;
+          d._anim = body.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 340, easing: ease });
+          d._anim.onfinish = () => { d._anim = null; };
+        }
+      }, { signal: this._ac.signal });
     });
   }
 
   renderVals() {
-    const CELLS = 16;
-    const barFor = (pct) => {
-      const full = Math.round((pct / 100) * CELLS);
-      return '█'.repeat(full) + '░'.repeat(CELLS - full) + ' ' + pct + '%';
-    };
-    const withMetrics = (list) => list.map(p => ({
-      ...p,
-      metrics: p.metrics.map(m => {
-        const num = parseFloat((m.value.match(/([\d.]+)/) || [])[1]);
-        const hasPct = /%/.test(m.value);
-        const pct = hasPct ? Math.max(0, Math.min(100, num)) : null;
-        return { ...m, hasBar: pct != null, pct: pct == null ? '' : String(pct), bar: pct == null ? '' : barFor(pct) };
-      }),
-    }));
-
     return {
-      inkHover: { boxShadow: '0 0 22px color-mix(in srgb, var(--accent) 55%, transparent)', transform: 'translateY(-1px)' },
-      ghostHover: { borderColor: 'var(--accent)', color: 'var(--accent)', boxShadow: '0 0 18px color-mix(in srgb, var(--accent) 22%, transparent)' },
-      chipHover: { borderColor: 'var(--accent)', color: 'var(--accent)', boxShadow: '0 0 14px color-mix(in srgb, var(--accent) 20%, transparent)' },
-      linkHover: { color: 'var(--accent)' },
       // 최신순. 활동·수상·GPA는 사이트에 두지 않고 resume.pdf에 맡긴다.
       news: [
-        { date: '2026.10.29', text: 'IEEE/IEIE ICCE-Asia 2026에서 1저자 논문 Aggregation Sensitivity in Diffusion Inpainting Along a Mean–Median Axis를 구두 발표했다.' },
-        { date: '2026.10', text: '샘물터 지하수위 예측 모델 성능 검증 용역 결과보고서를 납품했다.' },
-        { date: '2026.09', text: 'ETRI 방화벽 로그 기반 비정상 접근 탐지 용역 최종보고서를 제출했다.' },
-        { date: '2026.08.07', text: 'UIUC Grainger College of Engineering의 AI and Generative Models 과정을 수료하고 Certificate of Recognition을 받았다.' },
+        { date: '2026.10.29', text: 'ICCE-Asia 2026 구두 발표 · 1저자' },
+        { date: '2026.10', text: '샘물터 지하수위 예측 검증 용역 결과보고서 납품' },
+        { date: '2026.09', text: 'ETRI 방화벽 로그 탐지 용역 최종보고서 제출' },
+        { date: '2026.08.07', text: 'UIUC AI and Generative Models 수료 · Certificate of Recognition' },
       ],
       publications: [
         {
@@ -462,61 +430,115 @@ class Component extends DCLogic {
           title: 'Aggregation Sensitivity in Diffusion Inpainting Along a Mean–Median Axis',
           authorsBefore: '', self: 'MuGyum Kim*', authorsAfter: ', GiWon Kim, ChanJong Park, SungHo Lee†',
           venue: 'IEEE/IEIE ICCE-Asia 2026 · Oral · pp. 396–401',
+          summary: 'diffusion 인페인팅 앙상블을 평균–중앙값 축 위에서 집계했을 때 평가 지표마다 선택되는 계수가 달라짐을 분석',
+          thumb: 'assets/thumbs/icce-2026.jpg', thumbAlt: '입력 마스크와 두 집계 계수의 RePaint · DDNM 인페인팅 결과 비교 (논문 Fig. 1 일부)',
         },
       ],
-      skills: [
-        { label: 'languages', items: ['Python', 'C / C++'] },
-        { label: 'frameworks', items: ['PyTorch', 'segmentation-models-pytorch', 'timm'] },
-        { label: 'data · serving', items: ['ClickHouse', 'FastAPI'] },
-        { label: 'libraries', items: ['NumPy', 'Pandas', 'scikit-learn', 'OpenCV', 'geoip2fast'] },
-        { label: 'training', items: ['Weights & Biases'] },
-        { label: 'devops', items: ['Git / GitHub'] },
+      // 최신 종료일 순. problem / solution / result는 한 줄짜리 명사형 bullet,
+      // how는 해결 방식 이름, metric·metricLabel은 패널 우상단 대표 수치(없으면 ''),
+      // note는 그 수치를 한정하는 조건(결과 바로 아래), takeaway는 굵은 한 줄 결론.
+      projects: [
+        {
+          title: 'TCN · DLSTM 지하수위 예측 모델 성능 검증',
+          period: '2026.09 – 2026.10', org: 'DIPLAB · 샘물터 용역',
+          summary: '선행 TCN · DLSTM이 기준선(예측 시점 수위 유지)보다 나은지 58개 관정 자료로 재검증',
+          thumb: 'assets/thumbs/gwl-rmse.jpg', thumbAlt: '리드타임별 TCN · DLSTM 관정 RMSE 분포 상자그림 (확장 학습창)',
+          metric: '', metricLabel: '',
+          problem: [
+            '선행 연구의 TCN · DLSTM이 기준선(예측 시점 수위 유지)보다 나은지, 발주처 58개 관정 자료에서는 미검증',
+          ],
+          how: '사전 고정 평가 프로토콜',
+          solution: [
+            '구성 · 판정 규칙을 개발 구간에서 고정 → 평가 구간(84일)은 1회만 개봉',
+            '14 · 21 · 30일 뒤 일평균 수위 예측, 관정별 대응 검정 + Holm 보정으로 판정',
+          ],
+          result: [
+            'TCN · DLSTM 차이: 6개 조건 모두 Holm 보정 후 유의하지 않음',
+            '기준선 대비 skill 중앙값: 확장 학습창 6개 중 5개 양수, 이동 학습창 전부 음수 (검정 미실시)',
+            '재현 실행 202건(학습 18 · 추론 184) 비트 단위 일치',
+          ],
+          note: '자료 기간 1년 남짓 · 평가 구간 1회 → 계절성 · 다른 기간 · 지역으로의 일반화는 판단 불가',
+          takeaway: '성능 차이가 아닌 사전 파라미터 수 기준으로 TCN 권장, 관정별 기준선 확인 후 적용',
+        },
+        {
+          title: '방화벽 로그 기반 위협 트래픽 탐지 시스템',
+          period: '2026.03 – 2026.09', org: 'DIPLAB · ETRI 용역',
+          summary: '방화벽 flow 로그로 스캐닝 · C2 비콘 · 악성코드 유포를 동시에 판정하는 탐지 모델과 운영 서비스',
+          thumb: 'assets/thumbs/firewall-output.jpg', thumbAlt: '네 유형(Normal · Scanning · C2 Beacon · Malware Delivery)을 각각 확률로 출력하는 multi-label 판정 예시',
+          metric: '94.8%', metricLabel: 'Test Macro-F1',
+          problem: [
+            'flow 로그는 연결 단위 기록 → 여러 연결에 걸쳐 드러나는 위협(스캐닝 · C2 비콘 · 악성코드 유포)은 구분 곤란',
+            'ETRI 실운영 로그는 정답 라벨 없음 → 정밀도 · 재현율 직접 산출 불가',
+          ],
+          how: 'SDS epoch 집계 + multi-label MLP',
+          solution: [
+            '호스트별 패킷 20개 단위로 epoch 집계(SDS) → 전송 속도와 무관한 28차원 행동 feature',
+            '네 유형을 동시에 판정하는 MLP, 학습 · 검증 · 시험 데이터는 IP 단위로 분리',
+            '실운영 추론 결과는 피처 분포 · 라벨 구조 · 정규화 방식으로 교차 진단',
+          ],
+          result: [
+            'Test Macro-F1 94.8% · Validation 95.3% (학습에 없던 IP 기준)',
+            '실운영 1,621만 epoch 추론, Scanning 저검출과 C2 · 악성코드 유포 중첩의 원인을 데이터 특성에서 진단',
+          ],
+          note: '성능 수치는 162개 하이퍼파라미터 조합 중 validation 최고점 체크포인트 기준',
+          takeaway: 'Scanning 탐지를 ClickHouse 기반 배치 · 실시간 서비스로 배포',
+        },
+        {
+          title: '세그멘테이션 기반 농경지 모니터링 시스템',
+          period: '2023.06 – 2023.12', org: 'DIPLAB · 컨텍 기업연계',
+          summary: '위성영상에서 농경지 · 비닐하우스를 구분하는 세그멘테이션 모델과 polygon 변환',
+          thumb: 'assets/thumbs/crop-monitor.jpg', thumbAlt: '위성영상 원본, 정답 마스크, 예측 마스크와 polygon 변환 결과',
+          metric: '88.9%', metricLabel: 'mIoU · target 60%',
+          problem: [
+            '인력 파견 기반 농경지 모니터링 → 정확성 · 경제성 낮음',
+            '주기적으로 촬영되는 위성영상으로 상태 변화를 준실시간 추적할 필요',
+          ],
+          how: 'Segmentation 파이프라인',
+          solution: [
+            '컨텍 제공 위성영상으로 농경지 · 비닐하우스 데이터셋 구축 (8만 1천여 샘플)',
+            'UNet · SegFormer · HRNet · Hourglass · DeepLab 전부 학습 · 비교',
+            'Mask-to-Polygon 변환 → polygon 형식 평가 라벨과 형식 일치',
+          ],
+          result: [
+            'mIoU 88.9%로 과제 목표 60% 달성',
+          ],
+          note: '',
+          takeaway: '',
+        },
       ],
-      // 시스템을 만든 것이 아니라 논문을 재현하고 뜯어본 작업. projects/ 와 층위가
-      // 달라 별도 섹션으로 분리한다.
+      // 시스템 구축이 아니라 논문 재현·분석 작업이라 projects와 분리한다.
       studies: [
         {
           period: '2026.07 – 2026.08',
           title: 'DDPM 재현과 조건부 생성 · 홀 필링 분석',
-          desc: 'MNIST DDPM을 스타터 코드 없이 처음부터 구현해, 클래스 조건화가 생성 결과의 범주는 정하지만 원본의 세부 형태는 복원하지 못한다는 것을 확인했다. 조건화로 원본과 같은 숫자로 판정되는 비율은 0.700에서 0.993으로 올랐지만, 픽셀 거리는 거의 줄지 않았다. 홀 필링에서는 timestep 하나로 마스크 밖 보존과 마스크 안 생성을 동시에 만족하지 못했고(마스크 밖 오차 0.701), 원본을 매 단계 다시 주입하는 RePaint는 이 오차를 0.005로 낮췄다.',
-          org: 'UIUC Grainger College of Engineering · AI and Generative Models · Certificate of Recognition · 3인 공동 미니 프로젝트',
-        },
-      ],
-      projects: withMetrics([
-        {
-          no: '01',
-          title: 'TCN · DLSTM 지하수위 예측 모델 성능 검증',
-          period: '2026.09 – 2026.10', org: 'DIPLAB · 샘물터 용역',
-          desc: '선행 연구의 TCN과 DLSTM이 예측 시점의 수위를 그대로 쓰는 기준선(Persistence)보다 나은지를 58개 관정 자료로 다시 검증했다. 구성과 판정 규칙을 개발 구간에서 고정한 뒤 평가 구간(84일)을 한 번만 열어 14 · 21 · 30일 뒤 일평균 수위 예측을 비교했다. 두 모델의 차이는 6개 조건 모두 Holm 보정 후 유의하지 않았고, 기준선 대비 skill 중앙값은 확장 학습창 6개 조건 중 5개에서 양수였지만 이동 학습창에서는 모두 음수였다. 이에 따라 성능이 아닌 사전에 정한 파라미터 수 기준으로 TCN을 권장하고, 관정별로 기준선 대비 성능을 확인한 뒤 적용하도록 제언했다.',
-          metrics: [
-            { value: '58', label: '관정 · 416일 시간 단위 관측' },
-            { value: '202건', label: '재현 실행 비트 단위 일치 (학습 18 · 추론 184)' },
+          org: 'UIUC · AI and Generative Models · Certificate of Recognition',
+          summary: 'MNIST DDPM 직접 구현, 클래스 조건화와 홀 필링이 원본에서 복원하는 범위 비교',
+          thumb: 'assets/thumbs/ddpm-holefill.jpg', thumbAlt: '마스크 입력, 단일 timestep 복원, RePaint 복원 결과 (t=100, t=200)',
+          metric: '', metricLabel: '',
+          problem: [
+            '클래스 조건화와 홀 필링이 원본의 무엇을 복원하고 무엇을 잃는지 불명확',
           ],
-          note: '자료 기간이 1년 남짓이고 평가 구간이 한 기간뿐이어서 계절성이나 다른 기간 · 지역으로의 일반화는 판단할 수 없다. 결과보고서 · 단일 HTML 대시보드 · 재현용 자료를 납품했다.',
-        },
-        {
-          no: '02',
-          title: '방화벽 로그 기반 위협 트래픽 탐지 시스템',
-          period: '2026.03 – 2026.09', org: 'DIPLAB · ETRI 용역',
-          desc: 'ETRI 실운영 방화벽 로그에서 비정상 접근을 탐지하고, 정답 라벨이 없는 실데이터로 탐지 결과를 검증하는 시스템을 구축했다. 전송 속도와 무관하게 행위를 비교할 수 있도록 flow 로그를 호스트별 패킷 20개 단위의 epoch(SDS)으로 집계했고, 28차원 행동 feature로 normal · scanning · C2_beacon · malware_delivery를 동시에 판정하는 multi-label 모델을 학습했다. 실운영 로그 추론 결과는 피처 분포 · 라벨 구조 · 정규화 방식으로 교차 진단해, Scanning 저검출과 C2_beacon · malware_delivery 중첩의 원인을 데이터 특성에서 찾았다.',
-          metrics: [
-            { value: '94.8%', label: 'Test Macro-F1 · 학습에 없던 IP' },
-            { value: '95.3%', label: 'Validation Macro-F1' },
-            { value: '16.2M', label: '실운영 epoch 추론 · 1억 2,419만 패킷' },
+          how: 'DDPM 직접 구현 + 조건별 비교',
+          solution: [
+            'MNIST DDPM을 스타터 코드 없이 처음부터 구현',
+            '노이즈 시점 · 섭동 세기 · 마스크 종류별로 조건부 · 무조건부 생성과 RePaint 비교',
           ],
-          note: 'Scanning 탐지 결과를 ClickHouse에 적재하는 배치·실시간 서비스로 배포했다. 실운영 로그는 정답 라벨이 없어 정밀도·재현율 대신 분포 진단으로 검증했다. 성능 수치는 162개 하이퍼파라미터 조합 중 validation 최고점 체크포인트 기준이다.',
-        },
-        {
-          no: '03',
-          title: '세그멘테이션 기반 농경지 모니터링 시스템',
-          period: '2023.06 – 2023.12', org: 'DIPLAB · 컨텍 기업연계',
-          desc: '인공위성 영상에서 농경지 상태 변화를 준실시간으로 추적하는 시스템의 세그멘테이션 모델을 개발했다. 컨텍이 제공한 위성영상으로 농경지 · 비닐하우스 데이터셋(8만 1천여 개 샘플)을 구축하고, UNet · SegFormer · HRNet · Hourglass · DeepLab을 모두 학습해 비교했다. 평가 라벨이 polygon 형식이어서 모델 출력 마스크를 polygon으로 바꾸는 변환을 만들었다.',
-          metrics: [
-            { value: '88.9%', label: 'mIoU · 목표 60% 초과 달성' },
+          result: [
+            '조건화: 원본과 같은 숫자 판정 0.700 → 0.993, 픽셀 거리는 거의 그대로 (t = 200)',
+            '마스크 밖 오차: 단일 timestep 복원 0.701 → RePaint 0.005',
           ],
           note: '',
+          takeaway: '숫자의 범주는 조건화가 정하고, 개별 형태는 관측값 재주입(RePaint)이 보존',
         },
-      ]),
+      ],
+      skills: [
+        { label: 'languages', items: 'Python, C / C++' },
+        { label: 'frameworks', items: 'PyTorch, segmentation-models-pytorch, timm' },
+        { label: 'data · serving', items: 'ClickHouse, FastAPI' },
+        { label: 'libraries', items: 'NumPy, Pandas, scikit-learn, OpenCV, geoip2fast' },
+        { label: 'training', items: 'Weights & Biases' },
+        { label: 'devops', items: 'Git / GitHub' },
+      ],
     };
   }
 }
