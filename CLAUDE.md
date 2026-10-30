@@ -50,7 +50,7 @@ All listeners are registered with a shared `AbortController` signal and torn dow
 - `deploy.sh` — sync + verify + commit + push. The only sanctioned deployment path.
 - `support.js` — generated dc-runtime bundle (treat as read-only).
 - `assets/portrait.jpeg` — hero portrait referenced by the template.
-- `assets/resume.pdf` — linked by the `[ resume.pdf ]` hero button and by the GitHub profile README. One page, exported from Microsoft Word. Its source is the newest `~/Documents/01_이력서_포트폴리오/이력서_영문_김무겸_YYYY-MM.docx` (currently `2026-10`), which keeps the phone number; the published PDF is exported from a copy with the phone number removed.
+- `assets/resume.pdf` — linked by the `[ resume.pdf ]` hero button and by the GitHub profile README. One page, built with LaTeX (Awesome-CV, XeTeX port) from `~/Documents/01_이력서_포트폴리오/resume-latex/` — **not** in this repo, because the submission variant carries the phone number. Rebuild with `~/.local/bin/tectonic -X compile resume.tex` there (public, no phone) and copy `resume.pdf` here; `resume-submission.tex` produces the private copy with the phone number. Keep the resume's skills in sync with the site's `skills` array.
 - `assets/Title.docx` — a DDPM report outline draft, **not** the resume source. Git-ignored.
 - `docs/specs/` — design specs (e.g. the terminal-redesign spec). Committed and authoritative.
 - `.nojekyll` — required so GitHub Pages serves the files as-is.
